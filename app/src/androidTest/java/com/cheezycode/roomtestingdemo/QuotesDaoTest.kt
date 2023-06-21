@@ -15,7 +15,7 @@ class QuotesDaoTest {
     lateinit var quotesDao: QuotesDao
 
     @Before
-    fun setUp(){
+    fun setUp() {
         quoteDatabase = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             QuoteDatabase::class.java
@@ -25,31 +25,31 @@ class QuotesDaoTest {
 
 
     @Test
-    fun insertQuote_expectedSingleQuote() = runBlocking{
-//        val quote = Quote(0, "This is a test quote", "CheezyCode")
-//        quotesDao.insertQuote(quote)
-//
-//        val result = quotesDao.getQuotes().getOrAwaitValue()
-//
-//        Assert.assertEquals(1, result.size)
-//        Assert.assertEquals("This is a test quote", result[0].text)
+    fun insertQuote_expectedSingleQuote() = runBlocking {
+        val quote = Quote(0, "This is a test quote", "CheezyCode")
+        quotesDao.insertQuote(quote)
+
+        val result = quotesDao.getAllQuotes().getOrAwaitValue()
+
+        Assert.assertEquals(1, result.size)
+        Assert.assertEquals("This is a test quote", result[0].text)
     }
 
     @Test
     fun deleteQuote_expectedNoResults() = runBlocking {
-//        val quote = Quote(0, "This is a test quote", "CheezyCode")
-//        quotesDao.insertQuote(quote)
-//
-//        quotesDao.delete()
-//
-//        val result = quotesDao.getQuotes().getOrAwaitValue()
-//
-//        Assert.assertEquals(0, result.size)
+        val quote = Quote(0, "This is a test quote", "CheezyCode")
+        quotesDao.insertQuote(quote)
+
+        quotesDao.delete()
+
+        val result = quotesDao.getAllQuotes().getOrAwaitValue()
+
+        Assert.assertEquals(0, result.size)
     }
 
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         quoteDatabase.close()
     }
 }

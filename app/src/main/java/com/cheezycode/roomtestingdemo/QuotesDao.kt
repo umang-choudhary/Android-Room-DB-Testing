@@ -20,6 +20,9 @@ interface QuotesDao {
     suspend fun delete()
 
     @Query("SELECT * FROM quote")
+    fun getAllQuotes(): LiveData<List<Quote>>
+
+    @Query("SELECT * FROM quote")
     fun getQuotes(): Flow<List<Quote>>
 
     @Query("SELECT * FROM quote where id = :quoteId")
